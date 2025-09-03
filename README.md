@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1049004396.svg)](https://doi.org/10.5281/zenodo.17042472)
+
 # WorldPop STAC Data Downloader (Beta)
 
 A desktop application for downloading WorldPop population data through the STAC API.
