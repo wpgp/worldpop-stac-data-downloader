@@ -37,7 +37,7 @@ def find_icon():
     """Find application icon"""
     # Look for .ico files first (best for Windows)
     icon_files = ['icon.ico', 'app_icon.ico', 'worldpop_icon.ico']
-    
+
     # Check in src/components directory first
     components_dir = os.path.join('src', 'components')
     if os.path.exists(components_dir):
@@ -46,7 +46,7 @@ def find_icon():
             if os.path.exists(icon_path):
                 print(f"✓ Using icon: {icon_path}")
                 return icon_path
-    
+
     # Fallback to root directory
     for icon in icon_files:
         if os.path.exists(icon):
@@ -92,14 +92,14 @@ def build_executable():
             "--collect-all", "tkinter",
             "--collect-all", "PIL",
         ]
-        
+
         # Add icon if found
         if icon_path:
             if icon_path.endswith('.ico'):
                 cmd.extend(["--icon", icon_path])
             else:
                 print("Icon file is not .ico format, skipping icon")
-        
+
         # Add components directory with all assets
         components_dir = os.path.join('src', 'components')
         if os.path.exists(components_dir):
@@ -110,13 +110,13 @@ def build_executable():
         for file in data_files:
             if os.path.exists(file):
                 cmd.extend(["--add-data", f"{file};."])
-        
+
         cmd.append("main.py")
         
         print("Running PyInstaller...")
         print(f"Command: {' '.join(cmd)}")
         print("-" * 60)
-        
+
         result = subprocess.run(cmd, check=True, capture_output=False)
         
         # Check if executable was created
@@ -130,12 +130,12 @@ def build_executable():
             print(f"Executable location: {exe_path}")
             print(f"File size: {file_size:.1f} MB")
             print(f"Target OS: Windows")
-            
+
             print("\nBeta Version Notice:")
             print("• This is a beta version currently under testing")
             print("• A digitally signed version will be available soon")
             print("• Report any issues for improvement")
-            
+
             return True
         else:
             print("Executable was not created successfully")
@@ -161,13 +161,13 @@ def main():
     if os.name != 'nt':
         print("This build script is optimized for Windows")
         print("Building anyway, but some features may not work correctly...")
-    
+
     # Check if main.py exists
     if not os.path.exists('main.py'):
         print("main.py not found in current directory")
         print("Please run this script from the application root directory")
         return False
-    
+
     # Build executable
     success = build_executable()
     
@@ -179,7 +179,7 @@ def main():
         print("4. The exe is ready for beta testing distribution")
     else:
         print("\nBuild failed. Please check the error messages above.")
-        
+
     return success
 
 if __name__ == "__main__":

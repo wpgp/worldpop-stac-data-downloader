@@ -12,8 +12,7 @@ from PIL import Image, ImageTk
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.config.config import (
-    API_BASE_URL, API_KEY, AVAILABLE_YEARS, AVAILABLE_RESOLUTIONS,
-    AVAILABLE_PROJECTS, DEFAULT_DOWNLOAD_DIR
+    API_BASE_URL, API_KEY, DEFAULT_DOWNLOAD_DIR
 )
 from src.core.api_client import WorldPopSTACClient
 
@@ -147,7 +146,7 @@ class WorldPopApp(AppOperations):
         title_frame = ttk.Frame(header_frame)
         title_frame.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
-        ttk.Label(title_frame, text="WorldPop STAC API",
+        ttk.Label(title_frame, text="STAC API Data Downloader",
                   style='Title.TLabel').pack(anchor=tk.W)
 
         ttk.Label(title_frame, text="Browse, search, and download population datasets",
@@ -203,7 +202,6 @@ class WorldPopApp(AppOperations):
 
     def load_logos(self, parent_frame):
         """Load and display company logos"""
-        # Logo files to look for (you can add more logos)
         logo_files = [
             'worldpop_logo.png',
             'university_logo.png',
@@ -225,14 +223,9 @@ class WorldPopApp(AppOperations):
             if os.path.exists(logo_path):
                 try:
                     try:
-                        # Use PIL for better image handling with fixed dimensions
                         pil_image = Image.open(logo_path)
-
-                        # Resize to exact dimensions (may distort aspect ratio slightly)
-                        # Use LANCZOS for high quality scaling
                         pil_image = pil_image.resize((logo_width, logo_height), Image.Resampling.LANCZOS)
 
-                        # Convert to PhotoImage
                         tk_image = ImageTk.PhotoImage(pil_image)
                     except Exception as e:
                         # Fallback to basic tkinter (limited format support)
@@ -269,7 +262,7 @@ class WorldPopApp(AppOperations):
             logo_placeholder = ttk.Frame(parent_frame, relief='solid', borderwidth=1)
             logo_placeholder.pack(side=tk.LEFT, padx=(0, 10))
 
-            ttk.Label(logo_placeholder, text="🏢", font=('Arial', 24)).pack(padx=10, pady=10)
+            ttk.Label(logo_placeholder, text="logo", font=('Arial', 24)).pack(padx=10, pady=10)
             ttk.Label(logo_placeholder, text="Company\nLogo",
                       font=('Arial', 8), style='Info.TLabel').pack(padx=10, pady=(0, 10))
 
